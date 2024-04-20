@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+#include<fcntl.h>
+
+int main(){
+
+	pid_t p,p1,p2;
+	fork();
+	fork();
+	fork();
+	p=getpid();
+	p1=getppid();
+	printf("Using fork() system call, the current process id is %d and its parent process id is %d\n",p,p1);
+	p2=getuid();
+	printf("The real user id of the calling process is %d\n",p2);
+	p2=geteuid();
+	printf("The effective user id of the calling process is %d\n",p2);
+	p2=getgid();
+	printf("The real group of calling process is %d\n",p2);
+	p2=getegid();
+
+	printf("The effective group id of the calling process is %d\n",p2);
+	
+	//Implementation of open(),close(), read() and write()
+	int fd;
+	char buffer[80];
+	static char message[] = "Hello";
+	fd=open("test.txt",O_RDWR);
+	if(fd!=1){
+		printf("test.txt opened with read/write access\n");
+		write(fd,message,sizeof(message));
+		lseek(fd,0,0);
+		read(fd,buffer,sizeof(message));
+		printf("%s was written to test.txt\n",buffer);
+		close(fd);
+		
+	}
+
+	return 0;
+}

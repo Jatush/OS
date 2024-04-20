@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <string.h>
+int main()
+{
+int num1, num2, num3, greatest, smallest, fd;
+char buffer[100];
+char ans[100];
+printf("Enter the first number: ");
+scanf("%d", &num1);
+printf("Enter the second number: ");
+scanf("%d", &num2);
+printf("Enter the third number: ");
+scanf("%d", &num3);
+if (num1 > num2 && num1 > num3)
+{
+greatest = num1;
+if (num2 > num3)
+smallest = num3;
+else
+smallest = num2;
+}
+else if (num2 > num3 && num2 > num1)
+{
+greatest = num2;
+if (num3 > num1)
+smallest = num1;
+else
+smallest = num1;
+}
+else
+{
+greatest = num3;
+if (num1 > num2)
+smallest = num2;
+else
+smallest = num1;
+}
+sprintf(ans, "Greatest : %d And Smallest : %d", greatest, smallest);
+fd = open("answer.txt", O_RDWR | O_CREAT, 0644);
+if (fd != -1)
+{
+write(fd, ans, strlen(ans));
+lseek(fd,0,0);
+read(fd, buffer, sizeof(buffer));
+printf("The content of file answer.txt : %s", buffer);
+close(fd);
+}
+return 0;
+}

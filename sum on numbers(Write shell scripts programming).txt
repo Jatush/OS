@@ -1,0 +1,39 @@
+ echo "Arithematic Operations: "
+num1=10
+num2=20
+sum=$(($num1+$num2))
+echo "The sum of $num1 and $num2 is $sum"
+diff=$(($num1-$num2))
+echo "The difference of $num1 and $num2 is $diff"
+divide=$(($num1/$num2))
+echo "The division of $num1 and $num2 is $divide"
+multiply=$(($num1*$num2))
+echo "The multiplication of $num1 and $num2 is $multiply"
+modulus=$(($num1%$num2))
+echo "The modulus of $num1 and $num2 is $modulus"
+
+echo "Conditional Statements: "
+
+if [ sum%2==0 ]
+then 
+	echo "The sum of $num1 and $num2 i.e $sum is even."
+else 
+	echo "The sum of $num1 and $num3 i.e $sum is odd."
+fi
+
+echo "Top 10 process based on Memory Usage: "
+top -b -o -%MEM | head -n 10
+
+echo "Top 10 process based on CPU utilization:"
+top -b -o -%CPU | head -n 10
+
+echo "Top 10 process based on their PID's: "
+top -b -o -PID | head -n 10
+
+echo "The current logged in  user is $(whoami)"
+
+echo "The current working directory is $(pwd)"
+
+echo "The Linus Shell is $SHELL"
+
+echo "The Linux Kernel is $(uname -n)"
